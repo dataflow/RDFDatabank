@@ -283,7 +283,7 @@ class SwordDataBank(SwordServer):
         content_state = None
         deposit_uri = None
         derived_resource_uris = []
-        if deposit.content is not None:
+        if deposit.content_file is not None:
             ssslog.info("Replace request has file content - updating")
             
             # remove all the old files before adding the new.  We always leave
@@ -294,7 +294,7 @@ class SwordDataBank(SwordServer):
             dataset.increment_version_delta(clone_previous_version=True, copy_filenames=['manifest.rdf'])
 
             # store the content file
-            dataset.put_stream(deposit.filename, deposit.content)
+            dataset.put_stream(deposit.filename, deposit.content_file)
             ssslog.debug("New incoming file stored with filename " + deposit.filename)
             
             # FIXME: unpacking doesn't happen here ... (keeping for the time being for reference)
