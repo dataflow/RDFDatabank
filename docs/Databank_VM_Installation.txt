@@ -300,12 +300,16 @@ X. Integrate Databank with Datacite, for minting DOIs (this section is optional)
 ------------------------------------------------------------------------------------------------------
 If you want to integrate Databank with Datacite for minting DOIs for each of the data-packages, then you would need to do the following:
 
-Create a file called doi_config.py which has all of the authentication information given to you by Datacite. Copy the lines below and 
-edit the values for each of the fields in "#Details pertaining to account with datacite" and "#Datacite api endpoint" if it is different
+Create a file called doi_config.py which has all of the authentication information given to you by Datacite. 
+Copy the lines below (starting from the line #-*- coding: utf-8 -*-). 
+Edit the values for each of the fields in "#Details pertaining to account with datacite" and 
+"#Datacite api endpoint" if it is different
+Save it in a file called doi_config.py and copy it to /var/lib/databank/rdfdatabank/config/
 
 By default, this file is palced in /var/lib/databank/rdfdatabank/config/doi_config.py.
 If you want to place the file in a different location, make sure Datababk knows where to find the file. 
 The field 'doi.config' in section [app:main] in production.ini and development.ini has this setting.
+
 
 #-*- coding: utf-8 -*-
 from pylons import config
@@ -471,7 +475,7 @@ Tomcat
 	SOLR itself lives in three spots, 
 		/usr/share/solr - contains the SOLR home director,
 		/var/lib/solr/ - contains the data directory and
-		/etc/solr – contains the configuration data
+		/etc/solr ï¿½ contains the configuration data
 
 	The command to stop, start and restart tomcat are 
 		sudo /etc/init.d/tomcat6 [ stop | start | restart ]
