@@ -1,11 +1,12 @@
 from rdfdatabank.lib.utils import allowable_id2, create_new
 from rdfdatabank.lib.auth_entry import list_silos, add_dataset
+from rdfdatabank.lib.file_unpack import check_file_mimetype, BadZipfile, unpack_zip_item
 from sss import SwordServer, Authenticator, Auth, ServiceDocument, SDCollection, DepositResponse, SwordError, EntryDocument, Statement, Namespaces, AuthException
 from sss.negotiator import AcceptParameters, ContentType
 
 from pylons import app_globals as ag
 
-import uuid, re, logging, urllib
+import uuid, re, logging, urllib, os
 from datetime import datetime
 from rdflib import URIRef
 
@@ -435,6 +436,32 @@ class SwordDataBank(SwordServer):
         # now augment the receipt with the details of this particular deposit
         # this handles None arguments, and converts the xml receipt into a string
         receipt = self.augmented_receipt(receipt, deposit_uri, derived_resource_uris)
+
+        # Unpack the file if it is zip
+        item_real_filepath = dataset.to_dirpath()
+        target_filepath = "%s/%s"%(item_real_filepath, deposit.filename)
+        ssslog.info("The path for the deposit file %s is %s"%(deposit.filename, target_filepath))
+        if not os.path.isfile(target_filepath):
+            ssslog.debug("File not found %s"%target_filepath)
+        else:
+            ssslog.debug("File %s found"%target_filepath)
+        if check_file_mimetype(target_filepath, 'application/zip'):
+            ssslog.debug("Mimetype is application/zip for %s"%target_filepath)
+        else:
+            ssslog.debug("Mimetype is not apllication/zip"%target_filepath)
+        if os.path.isfile(target_filepath) and check_file_mimetype(target_filepath, 'application/zip'):
+            ssslog.info("Going to unpack zipfile %s"%deposit.filename)
+            target_dataset_name = dataset_id
+            target_dataset = rdf_silo.get_item(target_dataset_name)
+            try:
+                unpack_zip_item(target_dataset, dataset,  deposit.filename, rdf_silo, self.auth_credentials.identity.get('repoze.who.userid'))
+            except BadZipfile:
+                ssslog.error("Aborting with 400. BadZipfile: Couldn't unpack zipfile %s"%deposit.filename)
+                abort(400, "BadZipfile: Couldn't unpack zipfile")
+            except Exception as e:
+               ssslog.error("Error unpacking. \n %s"%str(e))
+        else:
+            ssslog.info("Not unpacking file %s"%deposit.filename)
 
         # finally, assemble the deposit response and return
         dr = DepositResponse()
