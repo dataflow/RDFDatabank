@@ -427,6 +427,7 @@ class SwordDataBank(SwordServer):
         
         new_manifest = s.serialise_rdf(rdf_string)
         dataset.put_stream("manifest.rdf", new_manifest)
+        dataset.sync()
         
         # FIXME: add in proper treatment here
         # now generate a receipt. 
@@ -454,7 +455,8 @@ class SwordDataBank(SwordServer):
             target_dataset_name = dataset_id
             target_dataset = rdf_silo.get_item(target_dataset_name)
             try:
-                unpack_zip_item(target_dataset, dataset,  deposit.filename, rdf_silo, self.auth_credentials.identity.get('repoze.who.userid'))
+                unpack_zip_item(target_dataset, dataset, deposit.filename, rdf_silo, self.auth_credentials.identity.get('repoze.who.userid'))
+                target_dataset.sync()
             except BadZipfile:
                 ssslog.error("Aborting with 400. BadZipfile: Couldn't unpack zipfile %s"%deposit.filename)
                 abort(400, "BadZipfile: Couldn't unpack zipfile")
