@@ -121,8 +121,6 @@ class DatasetsController(BaseController):
                     #Calculate the pagination for display of data packages
                     c.permissible_offsets = []
                     c.pages_to_show = 5
-                    print type(c.start), type(c.pages_to_show), type(c.rows), type(c.numFound)
-                    print c.start, c.pages_to_show, c.rows, c.numFound
                     try:
                         remainder = c.numFound % c.rows
                         if remainder > 0:
@@ -374,7 +372,7 @@ class DatasetsController(BaseController):
                         returndata['parts'][part] = serialisable_stat(c.parts[part])
                     returndata['readme_text'] = c.readme_text
                     returndata['manifest_pretty'] = c.manifest_pretty
-                    returndata['manifest'] = c.manifest
+                    returndata['manifest'] = c.metadata
                     returndata['zipfiles'] = c.zipfiles
                     if c.version:
                         returndata['version'] = c.version

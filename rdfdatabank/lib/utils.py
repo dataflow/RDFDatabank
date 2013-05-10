@@ -389,66 +389,18 @@ def natural_sort(l):
 def extract_metadata(item):
     g = item.get_graph()
     m = defaultdict(list)
-    #for s,p,o in g.triples((URIRef(item.uri), ag.NAMESPACES[dc]['identifier'], None)):
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dc']['title']):
-        m['title'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dc']['identifier']):
-        m['identifier'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dc']['description']):
-        m['description'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dc']['creator']):
-        m['creator'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dc']['subject']):
-        m['subject'].append(o)
-
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dcterms']['abstract']):
-        m['abstract'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dcterms']['created']):
-        try:
-            dt = formatDate(str(o))
-        except:
-            dt = o
-        m['created'].append(dt)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dcterms']['description']):
-        m['description'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dcterms']['hasVersion']):
-        m['hasVersion'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dcterms']['identifier']):
-        m['identifier'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dcterms']['isVersionOf']):
-        m['isVersionOf'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dcterms']['license']):
-        m['license'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dcterms']['mediator']):
-        m['mediator'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dcterms']['modified']):
-        try:
-            dt = formatDate(str(o))
-        except:
-            dt = o
-        m['modified'].append(dt)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dcterms']['publisher']):
-        m['publisher'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dcterms']['rights']):
-        m['rights'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dcterms']['subject']):
-        m['subject'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['dcterms']['title']):
-        m['title'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['oxds']['isEmbargoed']):
-        m['isEmbargoed'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['oxds']['embargoedUntil']):
-        try:
-            dt = formatDate(str(o))
-        except:
-            dt = o
-        m['embargoedUntil'].append(dt)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['oxds']['currentVersion']):
-        m['currentVersion'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['bibo']['doi']):
-        m['doi'].append(o)
-    for o in g.objects(URIRef(item.uri), ag.NAMESPACES['ore']['aggregates']):
-        m['aggregates'].append(o)
+    for s,p,o in g.triples((URIRef(item.uri), None, None)):
+        if type(o).__name__ == 'BNode':
+            continue
+        term = g.qname(p).split(':', 1)[1]
+        if term in ['created', 'date', 'modified', 'dateAccepted', 'dateCopyrighted', 'dateSubmitted', 'embargoedUntil']:
+            try:
+                dt = formatDate(str(o))
+            except:
+                dt = o
+            m[g.qname(p)].append(dt)
+        else:
+            m[g.qname(p)].append(o)
     return dict(m)
 
 def formatDate(dt):

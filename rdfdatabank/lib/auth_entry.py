@@ -24,6 +24,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 from rdfdatabank.model import meta, User, Group, Permission, Datasets
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
 #import traceback
 #import logging
 #log = logging.getLogger(__name__)
@@ -88,7 +89,7 @@ def delete_silo(silo_name):
         meta.Session.delete(g_q_group2)
         meta.Session.delete(g_q_group3)
         meta.Session.commit()
-    except IntegrityError:
+    except (IntegrityError, NoResultFound, MultipleResultsFound):
         #log.error('Error deleting silo %s'%silo_name)
         #print traceback.format_exc()
         meta.Session.rollback()
@@ -157,7 +158,7 @@ def delete_user(username):
         u = u_q.filter(User.user_name == u'%s'%username).one()
         meta.Session.delete(u)
         meta.Session.commit()
-    except IntegrityError:
+    except (IntegrityError, NoResultFound, MultipleResultsFound):
         #log.error('Error deleting user %s. Does the user exist?'%username)
         #print traceback.format_exc()
         meta.Session.rollback()
@@ -240,7 +241,7 @@ def delete_group_users(silo_name, user_groups):
             query = "DELETE FROM user_group WHERE user_id=%d and group_id=%d"%(u.id, g.id)
             meta.Session.execute(query)
         meta.Session.commit()
-    except IntegrityError:
+    except (IntegrityError, NoResultFound, MultipleResultsFound):
         #log.error('Error deleting users %s from group %s'%(unicode(user_groups), silo_name))
         #print traceback.format_exc()
         meta.Session.rollback()
@@ -407,7 +408,7 @@ def delete_dataset(silo_name, id):
         d_q_id = d_q.filter(Datasets.silo == u'%s'%silo_name).filter(Datasets.id == u'%s'%id).one()
         meta.Session.delete(d_q_id)
         meta.Session.commit()
-    except IntegrityError:
+    except (IntegrityError, NoResultFound, MultipleResultsFound):
         #log.error('Error deleting dataset %s in silo %s'%(id, silo_name))
         #print traceback.format_exc()
         meta.Session.rollback()

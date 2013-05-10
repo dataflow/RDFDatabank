@@ -103,48 +103,13 @@ cp /var/lib/databank/persisted_state.json $dbstore
 chgrp -R www-data $dbstore
 chmod -R 770 $dbstore
 
-echo "Setting python environment"
 #Setup the python virtual environment
+echo "Setting python environment"
 virtualenv --no-site-packages /var/lib/databank/
 cd /var/lib/databank/
 . bin/activate
-# Get the version of python being used
-if [ -d /var/lib/databank/lib/python2.6/ ]
-then
-	py_rs='https://github.com/anusharanganathan/RecordSilo/raw/master/dist/RecordSilo-0.4.16-py2.6.egg'
-	py_who='/var/lib/databank/lib/python2.6/site-packages/repoze.who-1.0.19-py2.6.egg/'
-	py_site=databank_ve26_wsgi
-        py_webob='/var/lib/databank/lib/python2.6/site-packages/WebOb-1.2b3-py2.7.egg'
-else
-	py_rs='https://github.com/anusharanganathan/RecordSilo/raw/master/dist/RecordSilo-0.4.15-py2.7.egg'
-	py_who='/var/lib/databank/lib/python2.7/site-packages/repoze.who-1.0.19-py2.7.egg/'
-	py_site=databank_ve27_wsgi
-        py_webob='/var/lib/databank/lib/python2.7/site-packages/WebOb-1.2b3-py2.7.egg'        
-fi
-easy_install python-dateutil==1.5
-easy_install pairtree==0.7.1-T
-easy_install $py_rs
-easy_install solrpy==0.9.5
-easy_install rdflib==2.4.2
-easy_install redis==2.4.11
 easy_install -U distribute
-easy_install MySQL-python
-easy_install pylons==1.0
-easy_install lxml==2.3.4
-easy_install web.py
-easy_install sqlalchemy==0.7.6
-easy_install webob==1.0.8
-easy_install repoze.what-pylons
-easy_install repoze.what-quickstart
-if [ -d $py_who ]
-then
-	rm -r $py_who
-fi
-if [ -d $py_webob ]
-then
-	rm -r $py_webob
-fi
-easy_install repoze.who==2.0a4 
+pip install -r requirements.txt
 
 #Setup the database and add the user password
 echo "Configuring the database"
