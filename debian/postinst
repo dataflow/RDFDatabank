@@ -108,6 +108,14 @@ echo "Setting python environment"
 virtualenv --no-site-packages /var/lib/databank/
 cd /var/lib/databank/
 . bin/activate
+# Get the version of python being used
+if [ -d /var/lib/databank/lib/python2.6/ ]
+then
+  py_site=databank_ve26_wsgi
+else
+  py_site=databank_ve27_wsgi
+fi
+
 easy_install -U distribute
 pip install -r requirements.txt
 

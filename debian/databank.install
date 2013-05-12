@@ -10,6 +10,7 @@ mod_wsgi /var/lib/databank/
 message_workers/ /var/lib/databank/
 rdfdatabank/ /var/lib/databank/
 rdfdatabank.egg-info/ /var/lib/databank
+requirements.txt /var/lib/databank/
 test.ini /var/lib/databank/
 who.ini /var/lib/databank/
 sss/ /var/lib/databank/
