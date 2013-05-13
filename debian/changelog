@@ -1,7 +1,7 @@
 databank (1.0.2) unstable; urgency=low
 
   * Cleaned debian package creation and python dependencies
-  * The manifest file is returned as hash rather than text+xml for application/json
+  * The properties of manifest.rdf is returned as hash for application/json
 
  -- Anusha Ranganathan <anusha.ranganathan@ieee.org>  Fri, 10 May 2013 14:08:50 +0000
 
