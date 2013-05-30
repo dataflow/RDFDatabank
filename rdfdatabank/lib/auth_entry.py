@@ -76,6 +76,12 @@ def add_silo(silo_name):
 
 def delete_silo(silo_name):
     try:
+        # Delete all datasets in silo
+        d_q = meta.Session.query(Datasets)
+        d_q_id = d_q.filter(Datasets.silo == u'%s'%silo_name)
+        for dataset in d_q_id:
+            meta.Session.delete(dataset)
+        # Delete silo
         g_q = meta.Session.query(Group)
         if silo_name == '*':
             g_q_group1 = g_q.filter(Group.group_name == u'databank_administrator').one()
