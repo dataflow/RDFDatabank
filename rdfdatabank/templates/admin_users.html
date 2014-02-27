@@ -11,7 +11,7 @@
 % if c.users:
   <ul>
   % for o in c.users:
-    <li><a href="/${c.silo_name}/users/${o}">${o}</a></li>
+    <li><a href="/${c.base}${c.silo_name}/users/${o}">${o}</a></li>
   % endfor
   </ul>
 % endif

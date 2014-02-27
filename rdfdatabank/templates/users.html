@@ -24,19 +24,19 @@
   <h2>Edit options</h2>
   <ul class="stateInfo">
   <li><a href="#add_user" onclick="showhide('add_user');">
-    <img src="/static/styles/images/user-add-icon-24.png"/>Create new user</a></li>
-  <li><a href="/admin">
-    <img src="/static/styles/images/silo-view-icon-24.png"/>View silos</a></li>
+    <img src="/${c.base}static/styles/images/user-add-icon-24.png"/>Create new user</a></li>
+  <li><a href="/${c.base}admin">
+    <img src="/${c.base}static/styles/images/silo-view-icon-24.png"/>View silos</a></li>
 
   </ul>
 </div>
 
 % if c.users:
   % for user in c.users:
-      <h2><a href="/users/${user['user_name']}">${user['user_name']}</a>
+      <h2><a href="/${c.base}users/${user['user_name']}">${user['user_name']}</a>
       % if not ('groups' in user and user['groups']):
-          <a class="delete" href="/users/${user['user_name']}" data-remove="delete_${user['user_name']}" data-url="/users">
-    <img src="/static/styles/images/user-delete-icon-16.png" alt="Delete user" title="Delete ${user['user_name']}"/></a>
+          <a class="delete" href="/${c.base}users/${user['user_name']}" data-remove="delete_${user['user_name']}" data-url="/${c.base}users">
+    <img src="/${c.base}static/styles/images/user-delete-icon-16.png" alt="Delete user" title="Delete ${user['user_name']}"/></a>
 
       % endif
       </h2>
@@ -61,7 +61,7 @@
             % if g == '*':
               <li>Databank administrator</li>
             % else:
-              <li><a href="/${g}/users/${user['user_name']}">${p} for ${g}</a></li>
+              <li><a href="/${c.base}${g}/users/${user['user_name']}">${p} for ${g}</a></li>
             % endif
         % endfor
         </ul>
@@ -74,6 +74,6 @@
 <a name="add_user"></a>
 <h2>Create new user</h2>
 <%include file="/register_new_user.html"/>
-<div class="top"><a href="#top" onclick="showhide('add_user');" title="Back to top"><img src="/static/styles/images/go-up-icon-24.png"/></a></div>
+<div class="top"><a href="#top" onclick="showhide('add_user');" title="Back to top"><img src="/${c.base}static/styles/images/go-up-icon-24.png"/></a></div>
 </div>
 

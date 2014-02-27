@@ -5,7 +5,7 @@
     for g, p in c.user['groups']:
       roles.append(p)
 %>
-<form class="update_role" method="POST" enctype="multipart/form-data" action="/${c.silo}/users/${c.username}" accept-charset="UTF-8">
+<form class="update_role" method="POST" enctype="multipart/form-data" action="/${c.base}${c.silo}/users/${c.username}" accept-charset="UTF-8">
 <div class="role">
 <label for="r_a">
 % if "administrator" in roles:

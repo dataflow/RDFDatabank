@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 <div id="search">
-<form method="GET" enctype="multipart/form-data" action="/search/detailed" accept-charset="UTF-8">
+<form method="GET" enctype="multipart/form-data" action="/${c.base}search/detailed" accept-charset="UTF-8">
 <label for="q" class="searchterm">Search term</label>
 % if c.q and c.q != "*:*":
 <input id="q" type="text" name="q" value="${c.q}"/>

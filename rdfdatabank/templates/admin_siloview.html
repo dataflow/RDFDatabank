@@ -23,21 +23,21 @@
   <h2>Edit options</h2>
   <ul class="stateInfo">
   <li><a href="#edit_silo" onclick="showhide('edit_silo');">
-    <img src="/static/styles/images/silo-edit-icon-24.png"/>Edit silo metadata</a></li>
-  ##<li><a href="/${c.silo}/users">
-  ##  <img src="/static/styles/images/user-group-icon-24.png"/>View users in silo</a></li>
+    <img src="/${c.base}static/styles/images/silo-edit-icon-24.png"/>Edit silo metadata</a></li>
+  ##<li><a href="/${c.base}${c.silo}/users">
+  ##  <img src="/${c.base}static/styles/images/user-group-icon-24.png"/>View users in silo</a></li>
   <li><a href="#add_members" onclick="showhide('add_members');">
-    <img src="/static/styles/images/user-group-add-24.png"/>Add users to silo</a></li>
-  <li><a class="delete" href="/${c.silo}/admin" data-remove="delete_${c.silo}" data-url="/admin">
-    <img src="/static/styles/images/delete-icon-24.png"/>Delete silo</a></li>
+    <img src="/${c.base}static/styles/images/user-group-add-24.png"/>Add users to silo</a></li>
+  <li><a class="delete" href="/${c.base}${c.silo}/admin" data-remove="delete_${c.silo}" data-url="/${c.base}admin">
+    <img src="/${c.base}static/styles/images/delete-icon-24.png"/>Delete silo</a></li>
   ##<li><a href="#add_silo" onclick="showhide('add_silo');">
-  ##  <img src="/static/styles/images/silo-add-icon-24.png"/>Create new silo</a></li>
+  ##  <img src="/${c.base}static/styles/images/silo-add-icon-24.png"/>Create new silo</a></li>
   <li><a href="#add_user" onclick="showhide('add_user');">
-    <img src="/static/styles/images/user-add-icon-24.png"/>Create new user</a></li>
-  <li><a href="/users">
-    <img src="/static/styles/images/user-group-icon-24.png"/>View users</a></li>
-  <li><a href="/admin">
-    <img src="/static/styles/images/silo-view-icon-24.png"/>View silos</a></li>
+    <img src="/${c.base}static/styles/images/user-add-icon-24.png"/>Create new user</a></li>
+  <li><a href="/${c.base}users">
+    <img src="/${c.base}static/styles/images/user-group-icon-24.png"/>View users</a></li>
+  <li><a href="/${c.base}admin">
+    <img src="/${c.base}static/styles/images/silo-view-icon-24.png"/>View silos</a></li>
 
   </ul>
 </div>
@@ -49,20 +49,20 @@
 <a name="edit_silo"></a>
 <h2>Update silo metadata</h2>
 <%include file="/alter_silo.html"/>
-<div class="top"><a href="#top" onclick="showhide('edit_silo');" title="Back to top"><img src="/static/styles/images/go-up-icon-24.png"/></a></div>
+<div class="top"><a href="#top" onclick="showhide('edit_silo');" title="Back to top"><img src="/${c.base}static/styles/images/go-up-icon-24.png"/></a></div>
 </div>
 
 <div id="add_members" class="edit_section" style="display: none;">
 <a name="add_members"></a>
 <h2>Add users to silo</h2>
 <%include file="/add_users_to_silo.html"/>
-<div class="top"><a href="#top" onclick="showhide('add_members');" title="Back to top"><img src="/static/styles/images/go-up-icon-24.png"/></a></div>
+<div class="top"><a href="#top" onclick="showhide('add_members');" title="Back to top"><img src="/${c.base}static/styles/images/go-up-icon-24.png"/></a></div>
 </div>
 
 <div id="add_user" class="edit_section" style="display: none;">
 <a name="add_user"></a>
 <h2>Create new user</h2>
 <%include file="/register_new_user.html"/>
-<div class="top"><a href="#top" onclick="showhide('add_user');" title="Back to top"><img src="/static/styles/images/go-up-icon-24.png"/></a></div>
+<div class="top"><a href="#top" onclick="showhide('add_user');" title="Back to top"><img src="/${c.base}static/styles/images/go-up-icon-24.png"/></a></div>
 </div>
 

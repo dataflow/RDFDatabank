@@ -35,17 +35,17 @@
   % endif
   % if c.version: 
     <br /> Change view : 
-    <a href="/${c.silo_name}/datasets/${c.id}/${c.path}?version=${c.version}&view=editor">Editor</a> | 
-    <a href="/${c.silo_name}/datasets/${c.id}/${c.path}?version=${c.version}&view=user">User</a></p>
+    <a href="/${c.base}${c.silo_name}/datasets/${c.id}/${c.path}?version=${c.version}&view=editor">Editor</a> | 
+    <a href="/${c.base}${c.silo_name}/datasets/${c.id}/${c.path}?version=${c.version}&view=user">User</a></p>
   % else:
     <br />Change view : 
-    <a href="/${c.silo_name}/datasets/${c.id}/${c.path}?view=editor">Editor</a> | 
-    <a href="/${c.silo_name}/datasets/${c.id}/${c.path}?view=user">User</a></p>
+    <a href="/${c.base}${c.silo_name}/datasets/${c.id}/${c.path}?view=editor">Editor</a> | 
+    <a href="/${c.base}${c.silo_name}/datasets/${c.id}/${c.path}?view=user">User</a></p>
   % endif
   -->
   <ul class="stateInfo">
   <li><a href="#upload_file" onclick="showhide('upload_file');">
-    <img src="/static/styles/images/file-new-icon-24.png"/>Upload file</a></li>
+    <img src="/${c.base}static/styles/images/file-new-icon-24.png"/>Upload file</a></li>
   </ul>
   </div>
 % endif
@@ -66,11 +66,11 @@
   <h3>View other versions:</h3><ul class="versions">
   % for v in c.versions:
     % if c.version and v == c.version:
-      <li><a class="current" href="/${c.silo_name}/datasets/${c.id}/${c.path}?version=${v}">${v}</a></li>
+      <li><a class="current" href="/${c.base}${c.silo_name}/datasets/${c.id}/${c.path}?version=${v}">${v}</a></li>
     % elif (not c.version) and (v == c.versions[-1]):
-      <li><a class="current" href="/${c.silo_name}/datasets/${c.id}/${c.path}?version=${v}">${v}</a></li>
+      <li><a class="current" href="/${c.base}${c.silo_name}/datasets/${c.id}/${c.path}?version=${v}">${v}</a></li>
     % else:
-      <li><a href="/${c.silo_name}/datasets/${c.id}/${c.path}?version=${v}">${v}</a></li>
+      <li><a href="/${c.base}${c.silo_name}/datasets/${c.id}/${c.path}?version=${v}">${v}</a></li>
     % endif
   % endfor
   </ul>
@@ -112,7 +112,7 @@
   <a name="upload_file"></a>
   <h2>Upload file to ${c.id}/${c.path}:</h2>
   <%include file="/item_file_upload.html"/>
-  <div class="top"><a href="#top" onclick="showhide('upload_file');" title="Back to top"><img src="/static/styles/images/go-up-icon-24.png"/></a></div>
+  <div class="top"><a href="#top" onclick="showhide('upload_file');" title="Back to top"><img src="/${c.base}static/styles/images/go-up-icon-24.png"/></a></div>
   </div>
 % endif
 

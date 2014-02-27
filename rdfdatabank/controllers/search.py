@@ -345,7 +345,7 @@ class SearchController(BaseController):
             except:
                 pass
 
-            c.add_facet =  u"%ssearch/detailed?q=%s&" % (ag.root, c.q.encode('utf-8'))
+            c.add_facet =  u"%s%ssearch/detailed?q=%s&" % (ag.root, ag.base, c.q.encode('utf-8'))
             c.add_facet = c.add_facet + urlencode(c.search) + filter_url
  
             if not solr_response:
@@ -492,7 +492,7 @@ class SearchController(BaseController):
             except:
                 solr_response = None
         
-            c.add_facet =  u"%ssearch/detailed?q=%s&" % (ag.root, c.q.encode('utf-8'))
+            c.add_facet =  u"%s%ssearch/detailed?q=%s&" % (ag.root, ag.base, c.q.encode('utf-8'))
             c.add_facet = c.add_facet + urlencode(c.search) + filter_url
  
             if not solr_response:

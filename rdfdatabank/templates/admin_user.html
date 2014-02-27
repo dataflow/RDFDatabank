@@ -28,7 +28,7 @@
     <li><a href="#edit_user" onclick="showhide('edit_user');">
     <img src="/static/styles/images/user-edit-icon-24.png"/>Update user details</a></li>
   % endif
-  <li><a class="delete" href="/users/${c.username}" data-remove="delete_${c.username}" data-url="/users">
+  <li><a class="delete" href="/users/${c.username}" data-remove="delete_${c.username}" data-url="/${c.base}users">
     <img src="/static/styles/images/user-delete-icon-24.png" alt="Delete user" title="Delete ${c.username}"/>Delete user</a>
   </li>
   <li><a href="/users">

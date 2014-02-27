@@ -24,15 +24,15 @@
   <h2>Edit options</h2>
   <ul class="stateInfo">
   <li><a href="#add_members" onclick="showhide('add_members');">
-    <img src="/static/styles/images/user-group-add-24.png"/>Add users to silo</a></li>
-  <li><a href="/${c.silo}/admin">
-    <img src="/static/styles/images/silo-edit-icon-24.png"/>Edit silo metadata</a></li>
+    <img src="/${c.base}static/styles/images/user-group-add-24.png"/>Add users to silo</a></li>
+  <li><a href="/${c.base}${c.silo}/admin">
+    <img src="/${c.base}static/styles/images/silo-edit-icon-24.png"/>Edit silo metadata</a></li>
   <li><a href="#add_user" onclick="showhide('add_user');">
-    <img src="/static/styles/images/user-add-icon-24.png"/>Create new user</a></li>
-  <li><a href="/users">
-    <img src="/static/styles/images/user-group-icon-24.png"/>View users</a></li>
-  <li><a href="/admin">
-    <img src="/static/styles/images/silo-view-icon-24.png"/>View silos</a></li>
+    <img src="/${c.base}static/styles/images/user-add-icon-24.png"/>Create new user</a></li>
+  <li><a href="/${c.base}users">
+    <img src="/${c.base}static/styles/images/user-group-icon-24.png"/>View users</a></li>
+  <li><a href="/${c.base}admin">
+    <img src="/${c.base}static/styles/images/silo-view-icon-24.png"/>View silos</a></li>
   </ul>
 </div>
 
@@ -41,12 +41,12 @@
   <ul>
   % for u in c.users:
     % if 'name' in u and u['name']:
-      <li><a href="/${c.silo}/users/${u['user_name']}">${u['name']}</a>
+      <li><a href="/${c.base}${c.silo}/users/${u['user_name']}">${u['name']}</a>
     % else:
-      <li><a href="/${c.silo}/users/${u['user_name']}">${u['firstname']} ${u['lastname']}</a>
+      <li><a href="/${c.base}${c.silo}/users/${u['user_name']}">${u['firstname']} ${u['lastname']}</a>
     % endif
-    <a class="delete" href="/${c.silo}/users/${u['user_name']}" data-remove="delete_${c.silo}_${u['user_name']}" data-url="/${c.silo}/users">
-    <img src="/static/styles/images/user-delete-icon-16.png" alt="Delete user from silo" title="Delete ${u['user_name']} from ${c.silo}"/></a>
+    <a class="delete" href="/${c.base}${c.silo}/users/${u['user_name']}" data-remove="delete_${c.silo}_${u['user_name']}" data-url="/${c.base}${c.silo}/users">
+    <img src="/${c.base}static/styles/images/user-delete-icon-16.png" alt="Delete user from silo" title="Delete ${u['user_name']} from ${c.silo}"/></a>
     <ul class="metadata">
       <li><span class="displayLabel">Username</span> (${u['user_name']})</li>
       <li><span class="displayLabel">Role</span>${u['permission']}</li>
@@ -59,13 +59,13 @@
 <a name="add_members"></a>
 <h2>Add users to silo</h2>
 <%include file="/add_users_to_silo.html"/>
-<div class="top"><a href="#top" onclick="showhide('add_members');" title="Back to top"><img src="/static/styles/images/go-up-icon-24.png"/></a></div>
+<div class="top"><a href="#top" onclick="showhide('add_members');" title="Back to top"><img src="/${c.base}static/styles/images/go-up-icon-24.png"/></a></div>
 </div>
 
 <div id="add_user" class="edit_section" style="display: none;">
 <a name="add_user"></a>
 <h2>Create new user</h2>
 <%include file="/register_new_user.html"/>
-<div class="top"><a href="#top" onclick="showhide('add_user');" title="Back to top"><img src="/static/styles/images/go-up-icon-24.png"/></a></div>
+<div class="top"><a href="#top" onclick="showhide('add_user');" title="Back to top"><img src="/${c.base}static/styles/images/go-up-icon-24.png"/></a></div>
 </div>
 

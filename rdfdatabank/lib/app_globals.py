@@ -61,6 +61,11 @@ class Globals(object):
        
         if config.has_key("granary.store"):
             self.granary = Granary(config['granary.store'])
+
+        self.base = config.get("base.path", "")
+        self.base = self.base.strip()
+        if self.base and not self.base.endswith("/"):
+            self.base = self.base + "/"
             
         if config.has_key("redis.host"):
             self.redishost = config['redis.host']

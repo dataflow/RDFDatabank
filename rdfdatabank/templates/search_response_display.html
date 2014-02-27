@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 <%namespace name="options" file="/search_response_options.html" />
 ##=============================================================================
 ## Current search options
@@ -38,11 +39,11 @@ ${options.numresultspp("itemsppt")}
 % if c.docs and c.add_facet:
 <div id="link_to_this_search">Link to these search results | 
 <a href="${c.add_facet}&format=html&sort=${c.sort}&rows=${c.rows}&start=${c.start}">
-  <img src="/static/styles/images/link.png" border="0" alt="HTML" /> This page'</a>
+  <img src="/${c.base}static/styles/images/link.png" border="0" alt="HTML" /> This page'</a>
 <a href="${c.add_facet}&format=csv&sort=${c.sort}&rows=${c.rows}&start=${c.start}">
-  <img src="/static/styles/images/csv.png" border="0" alt="CSV Logo" /> CSV</a>
+  <img src="/${c.base}static/styles/images/csv.png" border="0" alt="CSV Logo" /> CSV</a>
 <a href="${c.add_facet}&format=json&sort=${c.sort}&rows=${c.rows}&start=${c.start}">
-  <img src="/static/styles/images/json.png" border="0" alt="JSON Logo" />JSON</a>
+  <img src="/${c.base}static/styles/images/json.png" border="0" alt="JSON Logo" />JSON</a>
 </div>
 % endif
 ##=============================================================================
@@ -64,10 +65,10 @@ if 'type' in c.docs[doc_index] and c.docs[doc_index]['type']:
 %>
 <h2 class="resultTitle">
 % if isSilo == True:
-<a href="/${c.docs[doc_index]['silo']}" title="Silo"><img title="Silo" alt="Silo" src="/static/styles/images/silo-view-icon-24.png">
+<a href="/${c.base}${c.docs[doc_index]['silo']}" title="Silo"><img title="Silo" alt="Silo" src="/${c.base}static/styles/images/silo-view-icon-24.png">
 % else:
-<a href="/${c.docs[doc_index]['silo']}/datasets/${c.docs[doc_index]['id']}" title="Data package">
-<img title="Data package" alt="Data package" src="/static/styles/images/datapackage-24.png">
+<a href="/${c.base}${c.docs[doc_index]['silo']}/datasets/${c.docs[doc_index]['id']}" title="Data package">
+<img title="Data package" alt="Data package" src="/${c.base}static/styles/images/datapackage-24.png">
 % endif
 % if 'title' in c.docs[doc_index] and c.docs[doc_index]['title'] and c.docs[doc_index]['title'][0]:
 ${c.docs[doc_index]['title'][0]}

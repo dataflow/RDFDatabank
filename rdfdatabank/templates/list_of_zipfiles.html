@@ -14,8 +14,8 @@ c.zipfile = zf
 c.newid = c.zipfiles[zf]
 %>
 <li><b>${zf}</b> : 
-<a href="/${c.silo_name}/items/${c.id}/${zf}">View</a> &nbsp;&nbsp; | &nbsp;&nbsp;
-<a href="/${c.silo_name}/datasets/${c.id}/${zf}">Download</a> &nbsp;&nbsp;
+<a href="/${c.base}${c.silo_name}/items/${c.id}/${zf}">View</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+<a href="/${c.base}${c.silo_name}/datasets/${c.id}/${zf}">Download</a> &nbsp;&nbsp;
 <%include file="/files_unpack.html"/><br /><br />
 </li>
 % endfor

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-<form method="POST" enctype="multipart/form-data" action="/${c.silo_name}/datasets/${c.current}" accept-charset="UTF-8" id="accessStatusForm">
+<form method="POST" enctype="multipart/form-data" action="/${c.base}${c.silo_name}/datasets/${c.current}" accept-charset="UTF-8" id="accessStatusForm">
 <fieldset><legend>Access status</legend>
 % if c.embargos and c.current in c.embargos and c.embargos[c.current]:
   % if c.embargos[c.current][0] == True or (isinstance(c.embargos[c.current][0], basestring) and c.embargos[c.current][0].lower() in ['true', '1', 1]):

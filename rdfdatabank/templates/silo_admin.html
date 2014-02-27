@@ -9,8 +9,8 @@
 <ul>
 % for silo in c.granary_list:
 <li id="delete_${silo}">
-  <a href="/${silo}/admin"><span class="name">${silo}</span></a> - 
-  <a class="delete" href="/${silo}/admin" data-remove="delete_${silo}" data-url="/admin">(remove)</a></li>
+  <a href="/${c.base}${silo}/admin"><span class="name">${silo}</span></a> - 
+  <a class="delete" href="/${c.base}${silo}/admin" data-remove="delete_${silo}" data-url="/${c.base}admin">(remove)</a></li>
 % endfor
 </ul>
 % endif

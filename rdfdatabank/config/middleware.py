@@ -39,6 +39,25 @@ from rdfdatabank.config.environment import load_environment
 
 from repoze.who.config import make_middleware_with_config as make_who_with_config
 
+from webob.exc import HTTPNotFound
+
+class FilteredApp(object):
+    ''' 
+    Only allow access when path_info starts with 'path', otherwise throw 404
+    '''
+    def __init__(self, app, path):
+        self.app = app
+        self.path = path
+   
+    def __call__(self, environ, start_response):
+        if self.path and environ['PATH_INFO'].startswith(self.path):
+            environ['PATH_INFO'] = environ['PATH_INFO'][len(self.path):] or '/'
+            environ['SCRIPT_NAME'] += self.path
+        #    return self.app(environ, start_response)
+        #else:
+        #    raise HTTPNotFound()
+        return self.app(environ, start_response)
+
 def make_app(global_conf, full_stack=True, static_files=True, **app_conf):
     """Create a Pylons WSGI application and return it
 
@@ -105,6 +124,9 @@ def make_app(global_conf, full_stack=True, static_files=True, **app_conf):
     if asbool(static_files):
         # Serve static files
         static_app = StaticURLParser(config['pylons.paths']['static_files'])
+        if config['base.path']:
+            static_app = FilteredApp(static_app, config['base.path'])
         app = Cascade([static_app, app])
-
+    if config['base.path']:
+        app = FilteredApp(app, config['base.path'])
     return app

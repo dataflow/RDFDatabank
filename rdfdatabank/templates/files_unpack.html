@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 % if c.zipfile:
-<form style="margin:0px;" method="POST" action="/${c.silo_name}/items/${c.id}" accept-charset="UTF-8" class="unpackForm">
+<form style="margin:0px;" method="POST" action="/${c.base}${c.silo_name}/items/${c.id}" accept-charset="UTF-8" class="unpackForm">
 <% 
 c.disp = c.zipfile.strip().strip('/').split('/')[-1]
 if len(c.disp) > 50:
     c.disp = "...%s"%c.disp[-50:]
 %>
-<fieldset><legend><a href="/${c.silo_name}/datasets/${c.id}/${c.zipfile}">${c.disp}</a></legend>
+<fieldset><legend><a href="/${c.base}${c.silo_name}/datasets/${c.id}/${c.zipfile}">${c.disp}</a></legend>
 <input type="hidden" id="zipFilename${c.zipFileCount}" name="filename" value="${c.zipfile}"/>
 % if c.newid:
 <label for="newPackageId${c.zipFileCount}">Data package Id to unpack to (optional) :</label>

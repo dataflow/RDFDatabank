@@ -15,7 +15,7 @@
     <div><span class="displayLabel">Disk Allocation (in Kb):</span>${c.kw.get('disk_allocation')} </div>
   % endif
   % if ('administrators' in c.kw and c.kw['administrators']) or ('managers' in c.kw and c.kw['managers']) or ('submitters' in c.kw and c.kw['submitters']):
-    <h3><a href="/${c.silo}/users">Members of the silo</a></h3>
+    <h3><a href="/${c.base}${c.silo}/users">Members of the silo</a></h3>
     % for role in ['administrators', 'managers', 'submitters']:
       % if role in c.kw and c.kw[role]:
         <%
@@ -25,11 +25,11 @@
         <h3>${role}</h3>
         <ul class="admin_list">
         % for o in admins:
-          <li><h4><a href="/${c.silo}/users/${o}">${o}</a></h4>
-          <a href="/${c.silo}/users/${o}">
-            <img src="/static/styles/images/user-edit-icon-16.png" alt="Edit user details" title="edit ${o}"/></a>
-          <a class="delete" href="/${c.silo}/users/${o}" data-remove="delete_${c.silo}_${o}" data-url="/${c.silo}/users">
-            <img src="/static/styles/images/delete-icon-16.png" alt="Delete user from silo" title="Delete ${o} from ${c.silo}"/></a>
+          <li><h4><a href="/${c.base}${c.silo}/users/${o}">${o}</a></h4>
+          <a href="/${c.base}${c.silo}/users/${o}">
+            <img src="/${c.base}static/styles/images/user-edit-icon-16.png" alt="Edit user details" title="edit ${o}"/></a>
+          <a class="delete" href="/${c.base}${c.silo}/users/${o}" data-remove="delete_${c.silo}_${o}" data-url="/${c.base}${c.silo}/users">
+            <img src="/${c.base}static/styles/images/delete-icon-16.png" alt="Delete user from silo" title="Delete ${o} from ${c.silo}"/></a>
           </li>
         % endfor
         </ul>
@@ -40,14 +40,14 @@
       owners = []
       owners = [x.strip() for x in c.kw['owners'].split(",") if x]
     %>
-    <h3><a href="/${c.silo}/users">Members of the silo</a></h3>
+    <h3><a href="/${c.base}${c.silo}/users">Members of the silo</a></h3>
     <ul class="admin_list">
     % for o in owners:
-      <li><h4><a href="/${c.silo}/users/${o}">${o}</a></h4>
-      <a href="/${c.silo}/users/${o}">
-        <img src="/static/styles/images/user-edit-icon-16.png" alt="Edit user details" title="edit ${o}"/></a>
-      <a class="delete" href="/${c.silo}/users/${o}" data-remove="delete_${c.silo}_${o}" data-url="/${c.silo}/users">
-        <img src="/static/styles/images/delete-icon-16.png" alt="Delete user from silo" title="Delete ${o} from ${c.silo}"/></a>
+      <li><h4><a href="/${c.base}${c.silo}/users/${o}">${o}</a></h4>
+      <a href="/${c.base}${c.silo}/users/${o}">
+        <img src="/${c.base}static/styles/images/user-edit-icon-16.png" alt="Edit user details" title="edit ${o}"/></a>
+      <a class="delete" href="/${c.base}${c.silo}/users/${o}" data-remove="delete_${c.silo}_${o}" data-url="/${c.base}${c.silo}/users">
+        <img src="/${c.base}static/styles/images/delete-icon-16.png" alt="Delete user from silo" title="Delete ${o} from ${c.silo}"/></a>
       </li>
     % endfor
     </ul>

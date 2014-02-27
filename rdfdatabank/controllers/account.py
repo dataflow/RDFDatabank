@@ -39,16 +39,16 @@ class AccountController(BaseController):
 
         #if not c.ident:
         #    abort(401, "Not Authorised")
-        c.login_counter = request.environ['repoze.who.logins']
+        c.login_counter = request.environ.get('repoze.who.logins', 1)
         if c.login_counter > 0:
             session['login_flash'] = """Wrong credentials. Have you been registered?"""
             session.save()
-        c.came_from = request.params.get('came_from') or "/"
+        c.came_from = request.params.get('came_from') or "/%s"%ag.base
         return render('/login.html')
 
     def welcome(self):
         identity = request.environ.get("repoze.who.identity")
-        came_from = request.params.get('came_from') or "/"
+        came_from = request.params.get('came_from') or "/%s"%ag.base
         came_from = unquote(came_from)
         came_from = unquote(came_from)
         came_from = unquote(came_from)
@@ -70,15 +70,15 @@ class AccountController(BaseController):
                 login_counter = request.environ['repoze.who.logins'] + 1
             except:
                 login_counter = 0
-            destination = "/login?came_from=%s&logins=%s" % (came_from, login_counter)
+            destination = "/%slogin?came_from=%s&logins=%s" % (ag.base,came_from, login_counter)
             return redirect(url(destination))
 
     def logout(self):
         c.userid = None
         c.message = "We hope to see you soon!"
         #display_message("We hope to see you soon!", status="success")
-        came_from = request.params.get('came_from') or "/"
-        #came_from = request.params.get('came_from', '') or "/"
+        came_from = request.params.get('came_from') or "/%s"%ag.base
+        #came_from = request.params.get('came_from', '') or "/%s"%ag.base
         came_from = unquote(came_from)
         came_from = unquote(came_from)
         came_from = unquote(came_from)

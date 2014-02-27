@@ -1,4 +1,10 @@
 # -*- coding: utf-8 -*-
+<%
+from pylons import app_globals as ag
+c.base = ag.base
+c.api_version = ag.api_version
+%>
+
 <!DOCTYPE html>
 
 <!--[if lt IE 7 ]> <html lang="en" class="ie ie6"> <![endif]-->
@@ -13,7 +19,7 @@
 <meta charset="utf-8" /> 
 
   
-  ${ h.javascript_link( '/static/jquery.js' ) }
+  ${ h.javascript_link( '/%sstatic/jquery.js'%c.base ) }
   ${self.head_tags()}
   <script type="text/javascript">
   $(document).ready( function() {
@@ -42,41 +48,41 @@
   
   
   <!--[if lt IE 9]>
-  ${ h.javascript_link( '/static/js/html5.js' ) }
+  ${ h.javascript_link( '/%sstatic/js/html5.js'%c.base ) }
   <![endif]-->
   
   <!-- auto-discovery link to sword service document -->
-  <link rel="http://purl.org/net/sword/discovery/service-document" href="/swordv2/service-document"/>
+  <link rel="http://purl.org/net/sword/discovery/service-document" href="${h.url_for('/swordv2/service-document')}"/>
   
   <!-- print stylesheet for print stlying -->
-  <link media="print"  href="/static/styles/print.css" rel="stylesheet" type="text/css"/>
+  <link media="print"  href="${h.url_for('/static/styles/print.css')}" rel="stylesheet" type="text/css"/>
   
   
   <!-- general reset styles for getting rid of annoying browser defaults -->
-  <link media="all"  href="/static/styles/reset.css" rel="stylesheet" type="text/css"/>
+  <link media="all"  href="${h.url_for('/static/styles/reset.css')}" rel="stylesheet" type="text/css"/>
 
   <!-- basic styles suitable for all devices *DO NOT put layout stuff here * -->
-<link media="all"  href="/static/styles/basic.css" rel="stylesheet" type="text/css"/>
+<link media="all"  href="${h.url_for('/static/styles/basic.css')}" rel="stylesheet" type="text/css"/>
 
   <!-- styles for mobile devices-->
-  <link href="/static/styles/marmoset.css" rel="stylesheet" type="text/css" media="screen and (max-width: 639px)"/> 
+  <link href="${h.url_for('/static/styles/marmoset.css')}" rel="stylesheet" type="text/css" media="screen and (max-width: 639px)"/> 
 
   <!-- styles for smallscreen devices-->
-  <link href="/static/styles/squirrelMonkey.css" rel="stylesheet" type="text/css" media="(min-width: 640px)"/> 
+  <link href="${h.url_for('/static/styles/squirrelMonkey.css')}" rel="stylesheet" type="text/css" media="(min-width: 640px)"/> 
 
 
   <!-- styles for small-to-medium screen desktop  devices-->
-  <link rel="stylesheet" type="text/css" href="/static/styles/chimpanzee.css"
+  <link rel="stylesheet" type="text/css" href="${h.url_for('/static/styles/chimpanzee.css')}"
 media="(min-width: 1100px) and (max-width: 1600px)"/> 
 
 
   <!-- styles for large screen desktop devices-->
-  <link  rel="stylesheet" type="text/css" href="/static/styles/silverback.css" media="screen and (min-width: 1601px)"/> 
+  <link  rel="stylesheet" type="text/css" href="${h.url_for('/static/styles/silverback.css')}" media="screen and (min-width: 1601px)"/> 
 
 
   <!-- styles for Internet explorer - imports the small/medium desktop stylesheet and contains  any ie-specific styles -->
   <!--[if (gt IE 4)&(lt IE 9)]>
-    <link media="screen" href="/static/styles/ie.css" rel="stylesheet" type="text/css"/>
+    <link media="screen" href="${h.url_for('/static/styles/ie.css')}" rel="stylesheet" type="text/css"/>
   <![endif]-->
 
 <!-- encourage mobile devices to initially load the site without zooming out -->
@@ -95,8 +101,6 @@ media="(min-width: 1100px) and (max-width: 1600px)"/>
    <li><a href="#mainnav">skip to navigation</a></li>
   
   </ul>
-  
-  
   
     <header class="pageHeader">
       <%include file="/header.html"/>
@@ -119,38 +123,33 @@ media="(min-width: 1100px) and (max-width: 1600px)"/>
 	<span class="nonVis"  >main navigation</span>
 
 	<ul id="mainnav">
-	<li> <a href="/" id="nav-index" >home</a></li>
-	
-	<li><a href="/silos" >browse</a></li>
-
-	
-	<li><a href="/about" >about</a></li>
-
+	<li> <a href="${h.url_for('/')}" id="nav-index" >home</a></li>	
+	<li><a href="${h.url_for('/silos')}" >browse</a></li>
+	<li><a href="${h.url_for('/about')}" >about</a></li>
 
 	% if showAdmin:
-	<li><a href="/admin">${showAdmin}</a></li>
+	<li><a href="${h.url_for('/admin')}">${showAdmin}</a></li>
 	% endif
-
 	</ul>
 
 <span class="nonVis" >breadcrumb trail</span>
 <ul class="breadcrumb" >
 % if c.silo_name:
-<li class="silo"><span>silo: </span><a href="/${c.silo_name}">${c.silo_name}</a>
+<li class="silo"><span>silo: </span><a href="/${c.base}${c.silo_name}">${c.silo_name}</a>
 % if c.ident and 'role' in c.ident and c.ident['role'] in ["admin", "manager"]:
-  <a href="/${c.silo_name}/admin/">manage ${c.silo_name}</a>
+  <a href="/${c.base}${c.silo_name}/admin/">manage ${c.silo_name}</a>
 % endif
 </li>
 % endif
 
 % if c.id:
-<li class="dataPackage"><span>data package: </span><a href="/${c.silo_name}/datasets/${c.id}">${c.id}</a></li>
+<li class="dataPackage"><span>data package: </span><a href="/${c.base}${c.silo_name}/datasets/${c.id}">${c.id}</a></li>
 % endif
 
 % if c.path:
 <%
 paths = c.path.split('/')
-path_url = "/%s/datasets/%s"%(c.silo_name,c.id)
+path_url = "/%s%s/datasets/%s"%(c.base,c.silo_name,c.id)
 %>
 % for path in paths:
 <% path_url = path_url + "/%s"%path %>
@@ -161,10 +160,10 @@ path_url = "/%s/datasets/%s"%(c.silo_name,c.id)
 
 <div class="nav_rt">
   % if c.user_logged_in_name:
-    <p>Welcome <a href="/users/${c.user_logged_in_name}">${c.user_logged_in_name}</a></p>
-    <p><a href="/logout_handler?came_from=${current_url}">Logout</a></p>
+    <p>Welcome <a href="/${c.base}users/${c.user_logged_in_name}">${c.user_logged_in_name}</a></p>
+    <p><a href="/${c.base}logout_handler?came_from=${current_url}">Logout</a></p>
   % else:
-    <p><a href="/login?came_from=${current_url}">Login</a></p>
+    <p><a href="/${c.base}login?came_from=${current_url}">Login</a></p>
   % endif
 </div>
 

@@ -27,19 +27,19 @@
   <h2>Edit options</h2>
   <ul class="stateInfo">
   <li><a href="#edit_role" onclick="showhide('edit_role');">
-    <img src="/static/styles/images/user-group-edit-24.png"/>Update user role</a></li>
-  <li><a class="delete" href="/${c.silo}/users/${c.username}" data-remove="delete_${c.silo}_${c.username}" data-url="/${c.silo}/users">
-    <img src="/static/styles/images/user-delete-icon-24.png" alt="Delete user" title="Delete ${c.username} from ${c.silo}"/>Delete user from silo</a>
+    <img src="/${c.base}static/styles/images/user-group-edit-24.png"/>Update user role</a></li>
+  <li><a class="delete" href="/${c.base}${c.silo}/users/${c.username}" data-remove="delete_${c.silo}_${c.username}" data-url="/${c.base}${c.silo}/users">
+    <img src="/${c.base}static/styles/images/user-delete-icon-24.png" alt="Delete user" title="Delete ${c.username} from ${c.silo}"/>Delete user from silo</a>
   % if c.ident['user'].user_name == c.username:
     <li><a href="#edit_user" onclick="showhide('edit_user');">
-    <img src="/static/styles/images/user-edit-icon-24.png"/>Update user details</a></li>
+    <img src="/${c.base}static/styles/images/user-edit-icon-24.png"/>Update user details</a></li>
   % endif
-  <li><a href="/${c.silo}/admin">
-    <img src="/static/styles/images/silo-edit-icon-24.png"/>Edit silo metadata</a></li>
-  <li><a href="/users">
-    <img src="/static/styles/images/user-group-icon-24.png"/>View users</a></li>
-  <li><a href="/admin">
-    <img src="/static/styles/images/silo-view-icon-24.png"/>View silos</a></li>
+  <li><a href="/${c.base}${c.silo}/admin">
+    <img src="/${c.base}static/styles/images/silo-edit-icon-24.png"/>Edit silo metadata</a></li>
+  <li><a href="/${c.base}users">
+    <img src="/${c.base}static/styles/images/user-group-icon-24.png"/>View users</a></li>
+  <li><a href="/${c.base}admin">
+    <img src="/${c.base}static/styles/images/silo-view-icon-24.png"/>View silos</a></li>
   </ul>
 </div>
 
@@ -66,7 +66,7 @@
         % if g == '*':
             <li>Databank administrator</li>
         % else:    
-            <li>${p} for <a href="/${g}">${g}</a></li>
+            <li>${p} for <a href="/${c.base}${g}">${g}</a></li>
         % endif
     % endfor
     </ul></li>
@@ -79,7 +79,7 @@
   <a name="edit_role"></a>
   <h2>Modify role for <i>${c.username}</i> in silo <i>${c.silo}</i></h2>
   <%include file="/update_user_role.html"/>
-  <div class="top"><a href="#top" onclick="showhide('edit_role');" title="Back to top"><img src="/static/styles/images/go-up-icon-24.png"/></a></div>
+  <div class="top"><a href="#top" onclick="showhide('edit_role');" title="Back to top"><img src="/${c.base}static/styles/images/go-up-icon-24.png"/></a></div>
   </div>
 % endif
 
@@ -89,7 +89,7 @@
   <a name="edit_user"></a>
   <h2>Update information for user <i>${c.username}</i></h2>
   <%include file="/update_user.html"/>
-  <div class="top"><a href="#top" onclick="showhide('edit_user');" title="Back to top"><img src="/static/styles/images/go-up-icon-24.png"/></a></div>
+  <div class="top"><a href="#top" onclick="showhide('edit_user');" title="Back to top"><img src="/${c.base}static/styles/images/go-up-icon-24.png"/></a></div>
   </div>
 % endif
 % endif

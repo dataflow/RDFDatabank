@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 % if c.parts:
 <% 
 if c.path:
@@ -27,14 +28,14 @@ else:
     ext = ""
 %>
 <li id="${lid}">${part} ${ext}
-<a href="/${c.silo_name}/datasets/${c.id}${subpath}/${part}${urlext}"><img src="/static/styles/images/view_icon_32.png" title="view or download file"></a>
+<a href="/${c.base}${c.silo_name}/datasets/${c.id}${subpath}/${part}${urlext}"><img src="/${c.base}static/styles/images/view_icon_32.png" title="view or download file"></a>
 %     if part.endswith('.zip'):
-    <a href="/${c.silo_name}/items/${c.id}${subpath}/${part}${urlext}"><img src="/static/styles/images/view_zip_icon_32.png" title="View contents of zip file"></a>
+    <a href="/${c.base}${c.silo_name}/items/${c.id}${subpath}/${part}${urlext}"><img src="/${c.base}static/styles/images/view_zip_icon_32.png" title="View contents of zip file"></a>
 %     endif
 %     if c.latest:
-<a class="delete" href="/${c.silo_name}/datasets/${c.id}${subpath}/${part}" data-remove="${lid}"
-  data-url="/${c.silo_name}/datasets/${c.id}${subpath}">
-  <img src="/static/styles/images/delete-icon-24.png"  title="delete file">
+<a class="delete" href="/${c.base}${c.silo_name}/datasets/${c.id}${subpath}/${part}" data-remove="${lid}"
+  data-url="/${c.base}${c.silo_name}/datasets/${c.id}${subpath}">
+  <img src="/${c.base}static/styles/images/delete-icon-24.png"  title="delete file">
 </a>
 %     endif
 </li>

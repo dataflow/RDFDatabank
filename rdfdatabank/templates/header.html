@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-<%
-from pylons import app_globals as ag
-%>
-  <h1><a  href="/" id="homelink">DataBank
+  <h1><a  href="/${c.base}" id="homelink">DataBank
   %if ag.api_version:
-  <span class="small">${ag.api_version}</span>
+  <span class="small">${c.api_version}</span>
  % endif
   </a></h1>
 <%include file="/search_form.html"/>

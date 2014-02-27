@@ -20,7 +20,7 @@
         % else:
 <span class="pagination_label">
         % endif
-<a href="/${c.silo_name}?start=0&rows=${c.rows}">&#171;</a>
+<a href="/${c.base}${c.silo_name}?start=0&rows=${c.rows}">&#171;</a>
 </span>
         % if c.start != 0:
 <span class="ellipse">&#133;</span>
@@ -54,7 +54,7 @@ ${h.link_to(pagcount, "%s?start=%d&rows=%d"%(c.silo_name, offset, c.rows))}
         % else:
 <span class="pagination_label">
         % endif
-<a href="${c.silo_name}?start=${c.lastPage}&rows=${c.rows}">&#187;</a>
+<a href="/${c.base}${c.silo_name}?start=${c.lastPage}&rows=${c.rows}">&#187;</a>
 </span>
 </span><!--class=numbers-->
 </div><!--class=paginated_results-->
@@ -94,7 +94,7 @@ ${c.start+c.rows}
 <table class="dataset_list">
 % for item in sorted(c.items):
 <tr>
-<td><ul><li><a href="/${c.silo_name}/datasets/${item}"> ${item}</a></li></ul></td>
+<td><ul><li><a href="/${c.base}${c.silo_name}/datasets/${item}"> ${item}</a></li></ul></td>
 <td>
 % if c.embargos and item in c.embargos and c.embargos[item]:
 <% 

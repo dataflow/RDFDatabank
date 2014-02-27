@@ -503,7 +503,11 @@ class DatasetsController(BaseController):
                 #    abort(400, "No file was received")
                 filename = params.get('filename')
                 if not filename:
-                    filename = params['file'].filename
+                    try:
+                        filename = params['file'].filename
+                    except:
+                        abort(400, "File not provided. Cannot retrieve filename")
+
                 if filename and JAILBREAK.search(filename) != None:
                     abort(400, "'..' cannot be used in the path or as a filename")
                 target_path = filename

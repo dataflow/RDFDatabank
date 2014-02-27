@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ##=============================================================================
 <%def name="pagination()">
     % if len(c.permissible_offsets) > 0:
@@ -74,8 +75,8 @@ ${h.link_to(pagcount, "%s&start=%d&rows=%d&sort=%s"%(c.add_facet, offset, c.rows
         titlestring = c.add_facet + "&sort=silo+desc&rows=%d&start=%d"%(c.rows, c.start)
 %>
 <a class="active" href="${relstring}">Relevance</a> | 
-<a href="${datestring}" title="Date descending">Date </a><img src="/static/styles/images/up_arrow_blue.png" height="10" alt="Descending"/> |
-<a href="${titlestring}" title="Silo descending">Silo </a><img src="/static/styles/images/up_arrow_blue.png" height="10" alt="Descending"/>
+<a href="${datestring}" title="Date descending">Date </a><img src="/${c.base}static/styles/images/up_arrow_blue.png" height="10" alt="Descending"/> |
+<a href="${titlestring}" title="Silo descending">Silo </a><img src="/${c.base}static/styles/images/up_arrow_blue.png" height="10" alt="Descending"/>
 
 %	elif (c.sort == "publicationDate desc"):
 <%
@@ -84,8 +85,8 @@ ${h.link_to(pagcount, "%s&start=%d&rows=%d&sort=%s"%(c.add_facet, offset, c.rows
 	titlestring = c.add_facet + "&sort=silo+desc&rows=%d&start=%d"%(c.rows, c.start)
 %>
 <a href="${relstring}">Relevance</a> |
-<a class="active" href="${datestring}" title="Date ascending">Date </a><img src="/static/styles/images/down_arrow_black.png" height="10" alt="Ascending"/> | 
-<a href="${titlestring}" title="Silo descending">Silo </a><img src="/static/styles/images/up_arrow_blue.png" height="10" alt="Descending"/>
+<a class="active" href="${datestring}" title="Date ascending">Date </a><img src="/${c.base}static/styles/images/down_arrow_black.png" height="10" alt="Ascending"/> | 
+<a href="${titlestring}" title="Silo descending">Silo </a><img src="/${c.base}static/styles/images/up_arrow_blue.png" height="10" alt="Descending"/>
 
 %	elif (c.sort == "publicationDate asc"):
 <%
@@ -94,8 +95,8 @@ ${h.link_to(pagcount, "%s&start=%d&rows=%d&sort=%s"%(c.add_facet, offset, c.rows
 	titlestring = c.add_facet + "&sort=silo+desc&rows=%d&start=%d"%(c.rows, c.start)
 %>
 <a href="${relstring}">Relevance</a> |
-<a class="active" href="${datestring}" title="Date descending">Date </a><img src="/static/styles/images/up_arrow_black.png" height="10" alt="Descending"/> |
-<a href="${titlestring}" title="Silo descending">Silo </a><img src="/static/styles/images/up_arrow_blue.png" height="10" alt="Descending"/>
+<a class="active" href="${datestring}" title="Date descending">Date </a><img src="/${c.base}static/styles/images/up_arrow_black.png" height="10" alt="Descending"/> |
+<a href="${titlestring}" title="Silo descending">Silo </a><img src="/${c.base}static/styles/images/up_arrow_blue.png" height="10" alt="Descending"/>
 
 %	elif (c.sort == "silo desc"):
 <%
@@ -104,8 +105,8 @@ ${h.link_to(pagcount, "%s&start=%d&rows=%d&sort=%s"%(c.add_facet, offset, c.rows
 	titlestring = c.add_facet + "&sort=silo+asc&rows=%d&start=%d"%(c.rows, c.start)
 %>
 <a href="${relstring}">Relevance</a> | 
-<a href="${datestring}" title="Date descending">Date </a><img src="/static/styles/images/up_arrow_blue.png" height="10" alt="Descending"/> |
-<a class="active" href="${titlestring}" title="Silo ascending">Silo </a><img src="/static/styles/images/down_arrow_black.png" height="10" alt="Ascending"/>
+<a href="${datestring}" title="Date descending">Date </a><img src="/${c.base}static/styles/images/up_arrow_blue.png" height="10" alt="Descending"/> |
+<a class="active" href="${titlestring}" title="Silo ascending">Silo </a><img src="/${c.base}static/styles/images/down_arrow_black.png" height="10" alt="Ascending"/>
 
 %	elif (c.sort == "silo asc"):
 <%
@@ -114,8 +115,8 @@ ${h.link_to(pagcount, "%s&start=%d&rows=%d&sort=%s"%(c.add_facet, offset, c.rows
 	titlestring = c.add_facet + "&sort=silo+desc&rows=%d&start=%d"%(c.rows, c.start)
 %>
 <a href="${relstring}">Relevance</a> |
-<a href="${datestring}" title="Date descending">Date </a><img src="/static/styles/images/up_arrow_blue.png" height="10" alt="Descending"/> |
-<a class="active" href="${titlestring}" title="Silo descending">Silo </a><img src="/static/styles/images/up_arrow_black.png" height="10" alt="Descending"/>
+<a href="${datestring}" title="Date descending">Date </a><img src="/${c.base}static/styles/images/up_arrow_blue.png" height="10" alt="Descending"/> |
+<a class="active" href="${titlestring}" title="Silo descending">Silo </a><img src="/${c.base}static/styles/images/up_arrow_black.png" height="10" alt="Descending"/>
 
 %	else:
 <%
@@ -124,8 +125,8 @@ ${h.link_to(pagcount, "%s&start=%d&rows=%d&sort=%s"%(c.add_facet, offset, c.rows
 	titlestring = c.add_facet + "&sort=silo+desc&rows=%d&start=%d"%(c.rows ,c.start)
 %>
 <a href="${relstring}">Relevance</a> |
-<a href="${datestring}" title="Date descending">Date </a><img src="/static/styles/images/up_arrow_blue.png" height="10" alt="Descecding"/> |
-<a href="${titlestring}" title="Silo descending">Silo </a><img src="/static/styles/images/up_arrow_blue.png" height="10" alt="Descecding"/>
+<a href="${datestring}" title="Date descending">Date </a><img src="/${c.base}static/styles/images/up_arrow_blue.png" height="10" alt="Descecding"/> |
+<a href="${titlestring}" title="Silo descending">Silo </a><img src="/${c.base}static/styles/images/up_arrow_blue.png" height="10" alt="Descecding"/>
 
 %	endif
 </span>
@@ -148,7 +149,7 @@ ${h.link_to(pagcount, "%s&start=%d&rows=%d&sort=%s"%(c.add_facet, offset, c.rows
 <a class="active" href="${twentyfstring}">25</a>
 <a href="${fiftystring}">50</a>
 <a href="${hundredstring}">100</a>
-<form class="itemsppform" action="/search/detailed" method="GET">
+<form class="itemsppform" action="/${c.base}search/detailed" method="GET">
 <input type="hidden" name="q" value="*:*">
 <input type="hidden" name="truncate" value="${c.truncate}">
 %    if c.chosen_facets:
@@ -178,7 +179,7 @@ ${h.link_to(pagcount, "%s&start=%d&rows=%d&sort=%s"%(c.add_facet, offset, c.rows
 <a href="${twentyfstring}">25</a>
 <a class="active" href="${fiftystring}">50</a>
 <a href="${hundredstring}">100</a>
-<form class="itemsppform" action="/search/detailed" method="GET">
+<form class="itemsppform" action="/${c.base}search/detailed" method="GET">
 <input type="hidden" name="q" value="*:*">
 <input type="hidden" name="truncate" value="${c.truncate}">
 %    if c.chosen_facets:
@@ -208,7 +209,7 @@ ${h.link_to(pagcount, "%s&start=%d&rows=%d&sort=%s"%(c.add_facet, offset, c.rows
 <a href="${twentyfstring}">25</a>
 <a href="${fiftystring}">50</a>
 <a class="active" href="${hundredstring}">100</a>
-<form class="itemsppform" action="/search/detailed" method="GET">
+<form class="itemsppform" action="/${c.base}search/detailed" method="GET">
 <input type="hidden" name="q" value="*:*">
 <input type="hidden" name="truncate" value="${c.truncate}">
 %    if c.chosen_facets:
@@ -238,7 +239,7 @@ ${h.link_to(pagcount, "%s&start=%d&rows=%d&sort=%s"%(c.add_facet, offset, c.rows
 <a href="${twentyfstring}">25</a>
 <a href="${fiftystring}">50</a>
 <a href="${hundredstring}">100</a>
-<form class="itemsppform" action="/search/detailed" method="GET">
+<form class="itemsppform" action="/${c.base}search/detailed" method="GET">
 <input type="hidden" name="q" value="*:*">
 <input type="hidden" name="truncate" value="${c.truncate}">
 %    if c.chosen_facets:
@@ -279,7 +280,7 @@ ${h.link_to(pagcount, "%s&start=%d&rows=%d&sort=%s"%(c.add_facet, offset, c.rows
 <div class="current_facet">
 <div class="search_remove">
 % if c.q and c.q != "*:*":
-<form action="/search/detailed" method="GET">
+<form action="/${c.base}search/detailed" method="GET">
 <input type="hidden" name="q" value="*:*">
 <input type="hidden" name="rows" value="${c.rows}">
 <input type="hidden" name="truncate" value="${c.truncate}">
@@ -320,7 +321,7 @@ ${h.link_to(pagcount, "%s&start=%d&rows=%d&sort=%s"%(c.add_facet, offset, c.rows
 % if c.typ and c.typ != 'all' and c.q != "*:*":
 <div class="current_facet">
 <div class="search_remove">
-<form action="/search/detailed" method="GET">
+<form action="/${c.base}search/detailed" method="GET">
 <input type="hidden" name="q" value="${c.q}">
 <input type="hidden" name="rows" value="${c.rows}">
 <input type="hidden" name="truncate" value="${c.truncate}">
@@ -367,7 +368,7 @@ else:
 %   for item in currentfacet:
 <div class="current_facet">
 <div class="search_remove">
-<form action="/search/detailed" method="GET">
+<form action="/${c.base}search/detailed" method="GET">
 <input type="hidden" name="q" value="${c.q}">
 <input type="hidden" name="rows" value="${c.rows}">
 <input type="hidden" name="truncate" value="${c.truncate}">

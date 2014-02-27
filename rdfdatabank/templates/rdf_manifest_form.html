@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 <div class="manifest-form">
-<form method="POST" enctype="multipart/form-data" action="/${c.silo_name}/datasets/${c.id}" accept-charset="UTF-8">
+<form method="POST" enctype="multipart/form-data" action="/${c.base}${c.silo_name}/datasets/${c.id}" accept-charset="UTF-8">
 <label for="manifestText">Add bibliographic data in the RDF template provided</label><br/>
 <textarea id="manifestText" name="text" cols="60" rows="10">
 ${c.manifest}

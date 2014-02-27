@@ -2,7 +2,7 @@
 <%inherit file="/base.html" />
 <%def name="head_tags()">
   <link rel="meta" type="application/rdf+xml" title="RDF Manifest"
-               href="/${c.silo_name}/datasets/${c.id}/manifest.rdf"/>
+               href="/${c.base}${c.silo_name}/datasets/${c.id}/manifest.rdf"/>
   <title> Data package ${c.id} </title>
 <script type="text/javascript">
 <!--
@@ -39,37 +39,37 @@ c.current = c.id
   Change view : 
   % if c.version: 
     % if c.view == 'editor':
-        <a class="current" href="/${c.silo_name}/datasets/${c.id}?version=${c.version}&view=editor">Editor</a>
-        <a href="/${c.silo_name}/datasets/${c.id}?version=${c.version}&view=user">User</a></p>
+        <a class="current" href="/${c.base}${c.silo_name}/datasets/${c.id}?version=${c.version}&view=editor">Editor</a>
+        <a href="/${c.base}${c.silo_name}/datasets/${c.id}?version=${c.version}&view=user">User</a></p>
     % else:
-        <a href="/${c.silo_name}/datasets/${c.id}?version=${c.version}&view=editor">Editor</a>
-        <a class="current" href="/${c.silo_name}/datasets/${c.id}?version=${c.version}&view=user">User</a></p>
+        <a href="/${c.base}${c.silo_name}/datasets/${c.id}?version=${c.version}&view=editor">Editor</a>
+        <a class="current" href="/${c.base}${c.silo_name}/datasets/${c.id}?version=${c.version}&view=user">User</a></p>
     % endif
   % else:
     % if c.view == 'editor':
-        <a class="current" href="/${c.silo_name}/datasets/${c.id}?view=editor">Editor</a>
-        <a href="/${c.silo_name}/datasets/${c.id}?view=user">User</a></p>
+        <a class="current" href="/${c.base}${c.silo_name}/datasets/${c.id}?view=editor">Editor</a>
+        <a href="/${c.base}${c.silo_name}/datasets/${c.id}?view=user">User</a></p>
     % else:
-        <a href="/${c.silo_name}/datasets/${c.id}?view=editor">Editor</a> 
-        <a class="current" href="/${c.silo_name}/datasets/${c.id}?view=user">User</a></p>
+        <a href="/${c.base}${c.silo_name}/datasets/${c.id}?view=editor">Editor</a> 
+        <a class="current" href="/${c.base}${c.silo_name}/datasets/${c.id}?view=user">User</a></p>
     % endif
   % endif
   -->
   <!-- State Information -->
   <ul class="stateInfo">
-  <li><a href="/${c.silo_name}/states/${c.id}">
-    <img src="/static/styles/images/state-icon-24.png"/>View state information</a></li>
+  <li><a href="/${c.base}${c.silo_name}/states/${c.id}">
+    <img src="/${c.base}static/styles/images/state-icon-24.png"/>View state information</a></li>
   <li><a href="#update_access" onclick="showhide('update_access');">
-    <img src="/static/styles/images/page-edit-icon-24.png"/>Update access policy</a></li>
+    <img src="/${c.base}static/styles/images/page-edit-icon-24.png"/>Update access policy</a></li>
   <li><a href="#add_metadata" onclick="showhide('add_metadata');">
-    <img src="/static/styles/images/file-add-icon-24.png"/>Add metadata</a></li>
+    <img src="/${c.base}static/styles/images/file-add-icon-24.png"/>Add metadata</a></li>
   <li><a href="#upload_file" onclick="showhide('upload_file');">
-    <img src="/static/styles/images/file-new-icon-24.png"/>Upload file</a></li>
-  <li><a class="delete" href="/${c.silo_name}/datasets/${c.id}" data-remove="${"_".join(c.silo_name.split("."))}_${"_".join(c.id.split(":"))}" data-url="/${c.silo_name}/datasets">
-    <img src="/static/styles/images/delete-icon-24.png"/>Delete data package</a></li>
+    <img src="/${c.base}static/styles/images/file-new-icon-24.png"/>Upload file</a></li>
+  <li><a class="delete" href="/${c.base}${c.silo_name}/datasets/${c.id}" data-remove="${"_".join(c.silo_name.split("."))}_${"_".join(c.id.split(":"))}" data-url="/${c.base}${c.silo_name}/datasets">
+    <img src="/${c.base}static/styles/images/delete-icon-24.png"/>Delete data package</a></li>
   % if c.zipfiles:
   <li><a href="#unpack_endpoints" onclick="showhide('unpack_endpoints');">
-    <img src="/static/styles/images/unzip-icon-32.png"/>Unpack zip files</a></li>
+    <img src="/${c.base}static/styles/images/unzip-icon-32.png"/>Unpack zip files</a></li>
   % endif
   </ul>
   </div>
@@ -91,11 +91,11 @@ c.current = c.id
   <h3>View other versions:</h3><ul class="versions">
   % for v in c.versions:
     % if c.version and v == c.version:
-      <li><a class="current" href="/${c.silo_name}/datasets/${c.id}?version=${v}">${v}</a></li>
+      <li><a class="current" href="/${c.base}${c.silo_name}/datasets/${c.id}?version=${v}">${v}</a></li>
     % elif (not c.version) and (v == c.versions[-1]):
-      <li><a class="current" href="/${c.silo_name}/datasets/${c.id}?version=${v}">${v}</a></li>
+      <li><a class="current" href="/${c.base}${c.silo_name}/datasets/${c.id}?version=${v}">${v}</a></li>
     % else:
-      <li><a href="/${c.silo_name}/datasets/${c.id}?version=${v}">${v}</a></li> 
+      <li><a href="/${c.base}${c.silo_name}/datasets/${c.id}?version=${v}">${v}</a></li> 
     % endif
   % endfor
   </ul>
@@ -170,21 +170,24 @@ if dt_human and dt_human.strip():
     <a name="update_access"></a>
     <h2>Update access policy</h2>
     <%include file="/embargo_form.html"/>
-    <div class="top"><a href="#top" onclick="showhide('update_access');" title="Back to top"><img src="/static/styles/images/go-up-icon-24.png"/></a></div>
+    <div class="top"><a href="#top" onclick="showhide('update_access');" title="Back to top">
+<img src="/${c.base}static/styles/images/go-up-icon-24.png"/></a></div>
     </div>
     <!-- Change RDF Manifest -->
     <div id="add_metadata" class="edit_section" style="display: none;">
     <a name="add_metadata"></a>
     <h2>Add metadata to the RDF Manifest:</h2>
     <%include file="/rdf_manifest_form.html"/>
-    <div class="top"><a href="#top" onclick="showhide('add_metadata');" title="Back to top"><img src="/static/styles/images/go-up-icon-24.png"/></a></div>
+    <div class="top"><a href="#top" onclick="showhide('add_metadata');" title="Back to top">
+<img src="/${c.base}static/styles/images/go-up-icon-24.png"/></a></div>
     </div>
     <!-- Upload File -->
     <div id="upload_file" class="edit_section" style="display: none;">
     <a name="upload_file"></a>
     <h2>Upload file to ${c.id}:</h2>
     <%include file="/file_upload.html"/>
-    <div class="top"><a href="#top" onclick="showhide('upload_file');" title="Back to top"><img src="/static/styles/images/go-up-icon-24.png"/></a></div>
+    <div class="top"><a href="#top" onclick="showhide('upload_file');" title="Back to top">
+<img src="/${c.base}static/styles/images/go-up-icon-24.png"/></a></div>
     </div>
     <!-- Unpack zipfiles -->
     % if c.zipfiles:
@@ -202,7 +205,8 @@ if dt_human and dt_human.strip():
        <li><%include file="/files_unpack.html"/></li>
       % endfor
       </ul>
-      <div class="top"><a href="#top" onclick="showhide('unpack_endpoints');" title="Back to top"><img src="/static/styles/images/go-up-icon-24.png"/></a></div>
+      <div class="top"><a href="#top" onclick="showhide('unpack_endpoints');" title="Back to top">
+<img src="/${c.base}static/styles/images/go-up-icon-24.png"/></a></div>
       </div>
     % endif
   % endif

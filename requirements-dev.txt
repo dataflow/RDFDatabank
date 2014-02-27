@@ -18,4 +18,4 @@ repoze.profile
 repoze.who-friendlyform
 repoze.who==2.0a4
 uuid
-
+web.py

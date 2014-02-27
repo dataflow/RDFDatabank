@@ -18,7 +18,7 @@ n = len(c.silo_infos)
   </tr>
   % for silo in c.silo_infos:
     <tr>
-    <td><a href="/${silo}">${c.silo_infos[silo][0]}</a></td>
+    <td><a href="/${c.base}${silo}">${c.silo_infos[silo][0]}</a></td>
     <td>${c.silo_infos[silo][1]}</td>
     <td>${c.silo_infos[silo][2]}</td>
     </tr>

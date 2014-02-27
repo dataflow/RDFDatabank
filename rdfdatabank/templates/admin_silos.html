@@ -22,12 +22,12 @@
   <ul class="stateInfo">
   % if  'administrator' in c.ident['permissions']:
   <li><a href="#add_silo" onclick="showhide('add_silo');">
-    <img src="/static/styles/images/silo-add-icon-24.png"/>Create new silo</a></li>
+    <img src="/${c.base}static/styles/images/silo-add-icon-24.png"/>Create new silo</a></li>
   % endif
-  <li><a href="/users">
-    <img src="/static/styles/images/user-group-icon-24.png"/>View users</a></li>
+  <li><a href="/${c.base}users">
+    <img src="/${c.base}static/styles/images/user-group-icon-24.png"/>View users</a></li>
   <li><a href="#add_user" onclick="showhide('add_user');">
-    <img src="/static/styles/images/user-add-icon-24.png"/>Create new user</a></li>
+    <img src="/${c.base}static/styles/images/user-add-icon-24.png"/>Create new user</a></li>
   </ul>
 </div>
 
@@ -37,13 +37,13 @@
 <ul>
 % for silo in c.granary_list:
 <li>
-  <h4><a href="/${silo}/admin">${silo}</a></h4>
-  <a href="/${silo}">
-    <img src="/static/styles/images/silo-view-icon-16.png" alt="View silo" title="View ${silo}"/></a>
-  <a href="/${silo}/admin">
-    <img src="/static/styles/images/silo-edit-icon-16.png" alt="Edit silo metadata" title="edit ${silo}"/></a>
-  <a class="delete" href="/${silo}/admin" data-remove="delete_${silo}" data-url="/admin">
-    <img src="/static/styles/images/delete-icon-16.png" alt="Delete silo" title="Delete ${silo}"/></a>
+  <h4><a href="/${c.base}${silo}/admin">${silo}</a></h4>
+  <a href="/${c.base}${silo}">
+    <img src="/${c.base}static/styles/images/silo-view-icon-16.png" alt="View silo" title="View ${silo}"/></a>
+  <a href="/${c.base}${silo}/admin">
+    <img src="/${c.base}static/styles/images/silo-edit-icon-16.png" alt="Edit silo metadata" title="edit ${silo}"/></a>
+  <a class="delete" href="/${c.base}${silo}/admin" data-remove="delete_${silo}" data-url="/${c.base}admin">
+    <img src="/${c.base}static/styles/images/delete-icon-16.png" alt="Delete silo" title="Delete ${silo}"/></a>
 </li>
 % endfor
 </ul>
@@ -55,7 +55,7 @@
   <a name="add_silo"></a>
   <h2>Create new silo</h2>
   <%include file="/create_new_silo.html"/>
-  <div class="top"><a href="#top" onclick="showhide('add_silo');" title="Back to top"><img src="/static/styles/images/go-up-icon-24.png"/></a></div>
+  <div class="top"><a href="#top" onclick="showhide('add_silo');" title="Back to top"><img src="/${c.base}static/styles/images/go-up-icon-24.png"/></a></div>
   </div>
 % endif
 
@@ -63,6 +63,6 @@
 <a name="add_user"></a>
 <h2>Create new user</h2>
 <%include file="/register_new_user.html"/>
-<div class="top"><a href="#top" onclick="showhide('add_user');" title="Back to top"><img src="/static/styles/images/go-up-icon-24.png"/></a></div>
+<div class="top"><a href="#top" onclick="showhide('add_user');" title="Back to top"><img src="/${c.base}static/styles/images/go-up-icon-24.png"/></a></div>
 </div>
 

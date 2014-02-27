@@ -27,14 +27,14 @@ ${self.flash()}
 % if user_logged_in:
   % if c.user_logged_in_name:
 <div class="pleaseNote"><p>You are already logged in as <b>${c.user_logged_in_name}</b>. 
-Please <b><a href="/logout_handler?came_from=/login">logout</a></b> before logging in again.</p></div>
+Please <b><a href="/${c.base}logout_handler?came_from=/{c.base}login">logout</a></b> before logging in again.</p></div>
   % else:
 <div class="pleaseNote"><p>You are already logged in. 
-Please <b><a href="/logout_handler?came_from=/login">logout</a></b> before logging in again.</p></div>
+Please <b><a href="/${c.base}logout_handler?came_from=/{c.base}login">logout</a></b> before logging in again.</p></div>
   % endif
 % else:
 <p>
-<form action="/login_handler?came_from=${c.came_from}&logins=${c.login_counter}" method="POST" id="form" accept-charset="UTF-8">
+<form action="/${c.base}login_handler?came_from=${c.came_from}&logins=${c.login_counter}" method="POST" id="form" accept-charset="UTF-8">
   <ul>
     <li>
       <label for="login">Username:</label>
