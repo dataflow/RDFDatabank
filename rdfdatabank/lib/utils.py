@@ -41,6 +41,7 @@ import re
 from collections import defaultdict
 
 from rdfdatabank.lib.auth_entry import list_silos, list_user_groups
+from rdfdatabank.config.namespaces import NAMESPACES
 
 ID_PATTERN = re.compile(r"^[0-9A-z\-\:]+$")
 
@@ -56,6 +57,8 @@ def authz(ident, permission=[]):
     if not permission:
         permission = [] 
     silos = []
+    if not ident or not 'user' in ident or not ident['user'] or not ident['user'].groups:
+        return silos
     for i in ident['user'].groups:
         if i.silo == '*':
             return granary_list
@@ -105,13 +108,13 @@ def is_embargoed(silo, id, refresh=False):
     # TODO evaluate ag.r.expire settings for these keys - popularity resets ttl or increases it?
     e = None
     e_d = None
-    try:
-        e = ag.r.get("%s:%s:embargoed" % (silo.state['storage_dir'], id))
-        e_d = ag.r.get("%s:%s:embargoed_until" % (silo.state['storage_dir'], id))
-    except:
-        pass
+    #try:
+    #    e = ag.r.get("%s:%s:embargoed" % (silo.state['storage_dir'], id))
+    #    e_d = ag.r.get("%s:%s:embargoed_until" % (silo.state['storage_dir'], id))
+    #except:
+    #    pass
 
-    if refresh or (not e or not e_d):
+    if refresh or not e or not e_d:
         if silo.exists(id):
             item = silo.get_item(id)
             e = item.metadata.get("embargoed")
@@ -120,10 +123,10 @@ def is_embargoed(silo, id, refresh=False):
                 e = True
             else:
                 e = False
-            try:
-                ag.r.set("%s:%s:embargoed" % (silo.state['storage_dir'], id), e)
-                ag.r.set("%s:%s:embargoed_until" % (silo.state['storage_dir'], id), e_d)
-            except:
+            #try:
+            #    ag.r.set("%s:%s:embargoed" % (silo.state['storage_dir'], id), e)
+            #    ag.r.set("%s:%s:embargoed_until" % (silo.state['storage_dir'], id), e_d)
+            #except:
                 pass
     return (e, e_d)
 
@@ -392,6 +395,8 @@ def extract_metadata(item):
     for s,p,o in g.triples((URIRef(item.uri), None, None)):
         if type(o).__name__ == 'BNode':
             continue
+        if 'oxds' in o or "http://vocab.ox.ac.uk/dataset/schema#" in o:
+            continue
         term = g.qname(p).split(':', 1)[1]
         if term in ['created', 'date', 'modified', 'dateAccepted', 'dateCopyrighted', 'dateSubmitted', 'embargoedUntil']:
             try:
@@ -400,7 +405,16 @@ def extract_metadata(item):
                 dt = o
             m[g.qname(p)].append(dt)
         else:
-            m[g.qname(p)].append(o)
+            try:
+                m[g.qname(p)].append(o.strip())
+            except:
+                m[g.qname(p)].append(o)
+    for s,p,o in g.triples((None, NAMESPACES['bibo']['doi'], None)):
+        if str(s).startswith(str(item.uri)):
+            try:
+                m[g.qname(p)].append(o.strip())
+            except:
+                m[g.qname(p)].append(o)
     return dict(m)
 
 def formatDate(dt):
@@ -423,11 +437,11 @@ def getSiloModifiedDate(silo_name):
     solr_response = None
     try:
         solr_response = ag.solr.raw_query(**solr_params)
+        result = simplejson.loads(solr_response)
     except:
-        pass
+        return ''
     if not solr_response:
         return ''
-    result = simplejson.loads(solr_response)
     docs = result['response'].get('docs',None)
     numFound = result['response'].get('numFound',None)
     if docs and len(docs) > 0 and docs[0] and 'modified' in  docs[0] and len(docs[0]['modified']) > 0:
